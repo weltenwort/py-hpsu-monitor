@@ -13,6 +13,7 @@ typer = "^0.3.2"
 pytest = "^5.2"
 pylint = "^2.6.0"
 black = "^20.8b1"
+pytest-watch = "^4.2.0"
 
 [tool.poetry.scripts]
 py-hpsu-monitor = "py_hpsu_monitor.cli:app"
