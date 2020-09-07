@@ -30,12 +30,14 @@ def parse_can_message(message: can.Message) -> ElsterFrame:
 
     if frame_type == ElsterFrameType.READ_REQUEST:
         return ElsterReadRequestFrame(
+            timestamp=message.timestamp,
             sender=sender,
             receiver=receiver,
             elster_index=elster_index,
         )
     elif frame_type == ElsterFrameType.READ_RESPONSE:
         return ElsterReadResponseFrame(
+            timestamp=message.timestamp,
             sender=sender,
             receiver=receiver,
             elster_index=elster_index,
@@ -43,6 +45,7 @@ def parse_can_message(message: can.Message) -> ElsterFrame:
         )
     else:
         return ElsterGenericFrame(
+            timestamp=message.timestamp,
             sender=sender,
             receiver=receiver,
             frame_type=frame_type,

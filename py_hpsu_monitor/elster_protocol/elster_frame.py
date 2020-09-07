@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime
 from enum import IntEnum
 from typing import Literal, Union
 
@@ -10,15 +11,16 @@ class ElsterFrameType(IntEnum):
 
 @dataclass(frozen=True)
 class ElsterBaseFrame:
+    timestamp: float
     sender: int
     receiver: int
 
     def __repr__(self):
         return (
             f"ElsterBaseFrame("
+            f"timestamp={datetime.utcfromtimestamp(self.timestamp)}, "
             f"sender={self.sender:x}, "
             f"receiver={self.receiver:x}, "
-            f"frame_type={self.frame_type}, "
             ")"
         )
 
@@ -31,6 +33,7 @@ class ElsterGenericFrame(ElsterBaseFrame):
     def __repr__(self):
         return (
             f"ElsterGenericFrame("
+            f"timestamp={datetime.utcfromtimestamp(self.timestamp)}, "
             f"sender={self.sender:x}, "
             f"receiver={self.receiver:x}, "
             f"frame_type={self.frame_type}, "
@@ -47,6 +50,7 @@ class ElsterReadRequestFrame(ElsterBaseFrame):
     def __repr__(self):
         return (
             f"ElsterReadRequestFrame("
+            f"timestamp={datetime.utcfromtimestamp(self.timestamp)}, "
             f"sender={self.sender:x}, "
             f"receiver={self.receiver:x}, "
             f"elster_index={self.elster_index:04x}, "
@@ -63,6 +67,7 @@ class ElsterReadResponseFrame(ElsterBaseFrame):
     def __repr__(self):
         return (
             f"ElsterReadResponseFrame("
+            f"timestamp={datetime.utcfromtimestamp(self.timestamp)}, "
             f"sender={self.sender:x}, "
             f"receiver={self.receiver:x}, "
             f"elster_index={self.elster_index:04x}, "
