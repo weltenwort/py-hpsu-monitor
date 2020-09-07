@@ -3,14 +3,14 @@ import asyncio
 import typer
 
 from .commands.parse_candump import run_parse_candump
+from .commands.monitor_canbus import run_monitor_canbus
 
 app = typer.Typer()
 
 
 @app.command()
 def run():
-    pass
-    # asyncio.run(run_monitor_canbus())
+    asyncio.run(run_monitor_canbus())
 
 
 @app.command()
