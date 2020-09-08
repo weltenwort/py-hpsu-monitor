@@ -9,8 +9,11 @@ app = typer.Typer()
 
 
 @app.command()
-def run():
-    asyncio.run(run_monitor_canbus())
+def run(
+    log_frames: bool = typer.Option(False, "--log-frames"),
+    log_registers: bool = typer.Option(False, "--log-registers"),
+):
+    asyncio.run(run_monitor_canbus(log_frames=log_frames, log_registers=log_registers))
 
 
 @app.command()
