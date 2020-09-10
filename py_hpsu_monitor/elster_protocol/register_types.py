@@ -10,6 +10,7 @@ ValueType = TypeVar("ValueType")
 @dataclass(frozen=True)
 class RegisterValue:
     register_type: "RegisterDefinition"
+    timestamp: float
     value: ValueType
 
 
@@ -30,4 +31,8 @@ class NumberRegisterDefinition(RegisterDefinition):
     factor: float = 1.0
 
     def parse_elster_frame(self, frame: ElsterReadResponseFrame):
-        return RegisterValue(register_type=self, value=frame.value * self.factor)
+        return RegisterValue(
+            register_type=self,
+            timestamp=frame.timestamp,
+            value=frame.value * self.factor,
+        )

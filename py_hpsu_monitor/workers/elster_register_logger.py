@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from typer import colors, echo, style
 
 from ..elster_protocol.elster_frame import ElsterFrame, ElsterReadResponseFrame
@@ -16,7 +18,12 @@ async def log_elster_registers(topic: PublishSubscribeTopic[ElsterFrame]):
             ].parse_elster_frame(frame)
 
             echo(
-                f"Register {style(register_value.register_type.name, fg=colors.CYAN)}"
-                f" ({register_value.register_type.label})"
-                f": {style(str(register_value.value), bold=True)}"
+                " ".join(
+                    [
+                        f"[{datetime.utcfromtimestamp(register_value.timestamp)}]",
+                        f"Register {style(register_value.register_type.name, fg=colors.CYAN)}",
+                        f'"{register_value.register_type.label}":',
+                        style(str(register_value.value), bold=True),
+                    ]
+                )
             )
