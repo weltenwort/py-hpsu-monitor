@@ -10,7 +10,26 @@ register_definitions: List[RegisterDefinition] = [
         label="T-WW",
         description="Angezeigt wird die aktuelle Temperatur des Warmwasserspeichers in C. Sollte keine Warmwasserfunktion aktiviert sein, wird --- angezeigt.",
         factor=0.1,
-    )
+    ),
+    NumberRegisterDefinition(
+        elster_index=0x01D6,
+        name="t_hs",
+        label="T-WE",
+        description="Angezeigt wird die aktuelle Vorlauftemperatur (TVBH) des Waermeerzeugers in C",
+        factor=0.1,
+    ),
+    NumberRegisterDefinition(
+        elster_index=0x091C,
+        name="qboh",
+        label="EHS für DHW",
+        description="Angezeigt wird die Waermemenge des zusaetzlichen Waermeerzeugers fuer die Warmwasserbereitung in kWh",
+    ),
+    NumberRegisterDefinition(
+        elster_index=0xC0F9,
+        name="ehs",
+        label="EHS",
+        description="Aktuelle Leistung des Backup-Heaters in kW",
+    ),
 ]
 
 

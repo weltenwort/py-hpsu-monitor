@@ -24,11 +24,29 @@ def run(
         config = {
             "registers": [
                 {
-                    "elster_index": 0x0E,
+                    "elster_index": 0x000E,
                     "interval": 30,
                     "receiver": 0x180,
                     "sender": 0x680,
-                }
+                },
+                {
+                    "elster_index": 0x01D6,
+                    "interval": 30,
+                    "receiver": 0x180,
+                    "sender": 0x680,
+                },
+                {
+                    "elster_index": 0x091C,
+                    "interval": 30,
+                    "receiver": 0x180,
+                    "sender": 0x680,
+                },
+                {
+                    "elster_index": 0xC0F9,
+                    "interval": 30,
+                    "receiver": 0x180,
+                    "sender": 0x680,
+                },
             ]
         }
 
