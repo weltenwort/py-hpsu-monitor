@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from contextlib import contextmanager
-from typing import Protocol
+
+from typing_extensions import Protocol
 
 
 class SupportsShutdown(Protocol):

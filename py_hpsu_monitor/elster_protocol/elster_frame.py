@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 from datetime import datetime
 from enum import IntEnum
-from typing import Literal, Union
+from typing import Union
+from typing_extensions import Literal
 
 
 class ElsterFrameType(IntEnum):
