@@ -17,11 +17,12 @@ from ..workers.elster_register_canbus_poller import (
 
 async def run_monitor_canbus(
     can_interface: str,
+    sender_id: int,
     log_frames: bool = False,
     log_registers: bool = False,
     polling_configurations: List[RegisterPollingConfiguration] = [],
 ):
-    elster_frames = PublishSubscribeTopic()  # type: PublishSubscribeTopic[ElsterFrame]
+    elster_frames: PublishSubscribeTopic[ElsterFrame] = PublishSubscribeTopic()
 
     with shutting_down(
         can.Bus(channel=can_interface, bustype="socketcan", receive_own_messages=True)
@@ -35,6 +36,7 @@ async def run_monitor_canbus(
             poll_elster_registers_canbus(
                 bus=bus,
                 polling_configurations=polling_configurations,
+                sender_id=sender_id,
             ),
         )
 

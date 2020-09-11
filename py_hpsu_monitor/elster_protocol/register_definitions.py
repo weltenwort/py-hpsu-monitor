@@ -1,9 +1,9 @@
 from typing import List
 
-from .register_types import NumberRegisterDefinition, RegisterDefinition
+from .register_types import NumberRegisterDefinition, BaseRegisterDefinition
 
 
-register_definitions: List[RegisterDefinition] = [
+register_definitions: List[BaseRegisterDefinition] = [
     NumberRegisterDefinition(
         elster_index=0x000E,
         name="t_dhw",

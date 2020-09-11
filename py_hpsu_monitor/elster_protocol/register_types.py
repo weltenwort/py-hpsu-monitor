@@ -1,6 +1,9 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Optional, TypeVar
+from typing import Optional, TypeVar, Union
+
+from pydantic import BaseModel
+from typing_extensions import Literal
 
 from .elster_frame import ElsterReadResponseFrame
 
@@ -9,25 +12,28 @@ ValueType = TypeVar("ValueType")
 
 @dataclass(frozen=True)
 class RegisterValue:
-    register_type: "RegisterDefinition"
+    register_type: "BaseRegisterDefinition"
     timestamp: float
     value: ValueType
 
 
-@dataclass(frozen=True)
-class RegisterDefinition:
+class BaseRegisterDefinition(BaseModel, ABC):
+    kind: Literal["register"]
     elster_index: int
     name: str
     description: Optional[str] = None
     label: Optional[str] = None
+
+    class Config:
+        allow_mutation = False
 
     @abstractmethod
     def parse_elster_frame(self, frame: ElsterReadResponseFrame):
         raise NotImplementedError
 
 
-@dataclass(frozen=True)
-class NumberRegisterDefinition(RegisterDefinition):
+class NumberRegisterDefinition(BaseRegisterDefinition):
+    kind: Literal["number"]
     factor: float = 1.0
 
     def parse_elster_frame(self, frame: ElsterReadResponseFrame):
@@ -36,3 +42,6 @@ class NumberRegisterDefinition(RegisterDefinition):
             timestamp=frame.timestamp,
             value=frame.value * self.factor,
         )
+
+
+RegisterDefinition = Union[NumberRegisterDefinition]

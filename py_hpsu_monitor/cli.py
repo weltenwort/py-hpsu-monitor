@@ -1,8 +1,11 @@
 import asyncio
 from pathlib import Path
+from py_hpsu_monitor.config import (
+    load_configuration_from_file_path,
+    load_default_configuration,
+)
 from typing import Optional
 
-import tomlkit
 import typer
 
 from .commands.parse_candump import run_parse_candump
@@ -18,44 +21,19 @@ def run(
     log_frames: bool = typer.Option(False, "--log-frames"),
     log_registers: bool = typer.Option(False, "--log-registers"),
 ):
-    if config_file and config_file.is_file():
-        config = tomlkit.parse(config_file.read_text())
-    else:
-        config = {
-            "registers": [
-                {
-                    "elster_index": 0x000E,
-                    "interval": 30,
-                    "receiver": 0x180,
-                    "sender": 0x680,
-                },
-                {
-                    "elster_index": 0x01D6,
-                    "interval": 30,
-                    "receiver": 0x180,
-                    "sender": 0x680,
-                },
-                {
-                    "elster_index": 0x091C,
-                    "interval": 30,
-                    "receiver": 0x180,
-                    "sender": 0x680,
-                },
-                {
-                    "elster_index": 0xC0F9,
-                    "interval": 30,
-                    "receiver": 0x180,
-                    "sender": 0x680,
-                },
-            ]
-        }
+    configuration = (
+        load_configuration_from_file_path(config_file)
+        if config_file
+        else load_default_configuration()
+    )
 
     asyncio.run(
         run_monitor_canbus(
             can_interface=can_interface,
             log_frames=log_frames,
             log_registers=log_registers,
-            polling_configurations=config["registers"],
+            polling_configurations=configuration.can_bus.polling_configuration,
+            sender_id=configuration.can_bus.sender_id,
         )
     )
 
