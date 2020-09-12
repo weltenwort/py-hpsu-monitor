@@ -3,6 +3,7 @@ name = "py-hpsu-monitor"
 version = "0.1.0"
 description = ""
 authors = ["Felix Stürmer <stuermer@weltenwort.de>"]
+include = ["default-config.toml"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
