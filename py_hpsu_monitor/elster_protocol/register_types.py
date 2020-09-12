@@ -35,6 +35,7 @@ class BaseRegisterDefinition(BaseModel, ABC):
 class NumberRegisterDefinition(BaseRegisterDefinition):
     kind: Literal["number"] = "number"
     factor: float = 1.0
+    unit: Optional[str] = None
 
     def parse_elster_frame(self, frame: ElsterReadResponseFrame):
         return RegisterValue(

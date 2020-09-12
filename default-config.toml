@@ -1,3 +1,6 @@
+[mqtt]
+device_id = "test-hpsu-0"
+
 [can_bus]
 sender_id = 0x680
 

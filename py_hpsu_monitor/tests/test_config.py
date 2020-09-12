@@ -11,6 +11,7 @@ def test_load_default_configuration_from_text():
 
     assert configuration.can_bus.sender_id == 0x680
     assert configuration.can_bus.polling_configuration == []
+    assert configuration.mqtt.broker.hostname == "localhost"
 
 
 def test_load_configuration_from_text():
