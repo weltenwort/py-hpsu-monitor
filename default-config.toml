@@ -10,17 +10,17 @@ start_delay = 1
 [[can_bus.polling_configuration]]
 elster_index = 0x01D6
 interval = 30
-receiver = 0x180
+receiver_id = 0x180
 start_delay = 2
 
 [[can_bus.polling_configuration]]
 elster_index = 0x091C
 interval = 30
-receiver = 0x180
+receiver_id = 0x180
 start_delay = 3
 
 [[can_bus.polling_configuration]]
 elster_index = 0xC0F9
 interval = 30
-receiver = 0x180
+receiver_id = 0x180
 start_delay = 4

@@ -18,7 +18,7 @@ class RegisterValue:
 
 
 class BaseRegisterDefinition(BaseModel, ABC):
-    kind: Literal["register"]
+    kind: Literal["register"] = "register"
     elster_index: int
     name: str
     description: Optional[str] = None
@@ -33,7 +33,7 @@ class BaseRegisterDefinition(BaseModel, ABC):
 
 
 class NumberRegisterDefinition(BaseRegisterDefinition):
-    kind: Literal["number"]
+    kind: Literal["number"] = "number"
     factor: float = 1.0
 
     def parse_elster_frame(self, frame: ElsterReadResponseFrame):
