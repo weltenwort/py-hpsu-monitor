@@ -21,8 +21,7 @@ async def log_elster_registers(topic: PublishSubscribeTopic[ElsterFrame]):
                 " ".join(
                     [
                         f"[{datetime.utcfromtimestamp(register_value.timestamp)}]",
-                        f"Register {style(register_value.register_type.name, fg=colors.CYAN)}",
-                        f'"{register_value.register_type.label}":',
+                        f"Register {style(register_value.register_type.name, fg=colors.CYAN)}:",
                         style(str(register_value.value), bold=True),
                     ]
                 )

@@ -21,14 +21,12 @@ class BaseRegisterDefinition(BaseModel, ABC):
     kind: Literal["register"] = "register"
     elster_index: int
     name: str
-    description: Optional[str] = None
-    label: Optional[str] = None
 
     class Config:
         allow_mutation = False
 
     @abstractmethod
-    def parse_elster_frame(self, frame: ElsterReadResponseFrame):
+    def parse_elster_frame(self, frame: ElsterReadResponseFrame) -> RegisterValue:
         raise NotImplementedError
 
 

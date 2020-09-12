@@ -1,5 +1,16 @@
 [mqtt]
-device_id = "test-hpsu-0"
+configuration_topic_template = "homeassistant/sensor/{device_id}/config"
+state_topic_template = "homeassistant/sensor/{device_id}/state"
+
+[mqtt.broker]
+hostname = "localhost"
+port = 1883
+
+[mqtt.device]
+id = "hpsu-0"
+name = "HPSU 0"
+manufacturer = "Rotex"
+model = "Unknown Model"
 
 [can_bus]
 sender_id = 0x680

@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List, Optional
 
-from pydantic import BaseModel, SecretStr
+from pydantic import BaseModel
 import tomlkit
 
 from .workers.elster_register_canbus_poller import RegisterPollingConfiguration
@@ -34,15 +34,22 @@ class MqttBrokerConfig(BaseModel):
     hostname: str = "localhost"
     port: int = 1883
     username: Optional[str] = None
-    password: Optional[SecretStr] = None
+    password: Optional[str] = None
+
+
+class MqttDeviceConfig(BaseModel):
+    id: str = "hpsu-0"
+    name: str = "HPSU 0"
+    manufacturer: str = "Rotex"
+    model: str = "Unknown Model"
 
 
 class MqttConfig(BaseModel):
     configuration_topic_template: str = "homeassistant/sensor/{device_id}/config"
     state_topic_template: str = "homeassistant/sensor/{device_id}/state"
-    device_id: str = "hpsu-0"
 
     broker: MqttBrokerConfig = MqttBrokerConfig()
+    device: MqttDeviceConfig = MqttDeviceConfig()
 
 
 class PyHpsuMonitorConfig(BaseModel):
