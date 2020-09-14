@@ -10,7 +10,8 @@ def test_load_default_configuration_from_text():
     configuration = load_configuration_from_text("")
 
     assert configuration.can_bus.sender_id == 0x680
-    assert configuration.can_bus.polling_configuration == []
+    assert configuration.can_bus.default_register_configuration.polling_interval == 60
+    assert configuration.can_bus.register_configuration == []
     assert configuration.mqtt.broker.hostname == "localhost"
 
 
@@ -21,17 +22,22 @@ def test_load_configuration_from_text():
         [can_bus]
         sender_id = 0x900
 
-        [[can_bus.polling_configuration]]
+        [can_bus.default_register_configuration]
+        polling_enabled = false
+        polling_interval = 90.0
+
+        [[can_bus.register_configuration]]
         elster_index = 0x000E
-        interval = 30
-        start_delay = 1
+        polling_interval = 30
         """
         )
     )
 
     assert configuration.can_bus.sender_id == 0x900
-    assert configuration.can_bus.polling_configuration[0].elster_index == 0x000E
-    assert configuration.can_bus.polling_configuration[0].interval == 30
+    assert configuration.can_bus.default_register_configuration.polling_enabled == False
+    assert configuration.can_bus.default_register_configuration.polling_interval == 90.0
+    assert configuration.can_bus.register_configuration[0].elster_index == 0x000E
+    assert configuration.can_bus.register_configuration[0].polling_interval == 30
 
 
 def test_fail_to_load_configuration_from_text():
@@ -42,8 +48,8 @@ def test_fail_to_load_configuration_from_text():
             [can_bus]
             sender_id = 0x900
 
-            [[can_bus.polling_configuration]]
-            interval = 30
+            [[can_bus.register_configuration]]
+            polling_interval = 30
             """
             )
         )

@@ -1,8 +1,32 @@
 [[register_definitions]]
+  elster_index = 0x000C
+  factor = 0.1
+  kind = "number"
+  name = "temp-aussen"
+  owner_id = 0x180
+  unit = "°C"
+
+[[register_definitions]]
+  elster_index = 0x000D
+  factor = 0.1
+  kind = "number"
+  name = "temp-vorlauf"
+  owner_id = 0x180
+  unit = "°C"
+
+[[register_definitions]]
   elster_index = 0x000E
   factor = 0.1
   kind = "number"
   name = "temp-speicher-ist-t-dhw"
+  owner_id = 0x180
+  unit = "°C"
+
+[[register_definitions]]
+  elster_index = 0x0016
+  factor = 0.1
+  kind = "number"
+  name = "temp-ruecklauf-ist"
   owner_id = 0x180
   unit = "°C"
 

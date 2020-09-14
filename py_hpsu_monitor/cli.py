@@ -54,7 +54,8 @@ def run(
             log_frames=log_frames,
             log_registers=log_registers,
             mqtt_config=configuration.mqtt,
-            polling_configurations=configuration.can_bus.polling_configuration,
+            default_register_configuration=configuration.can_bus.default_register_configuration,
+            register_configurations=configuration.can_bus.register_configuration,
             register_definitions=register_definitions,
             sender_id=configuration.can_bus.sender_id,
         )

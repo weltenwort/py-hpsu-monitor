@@ -1,4 +1,5 @@
 [mqtt]
+enabled = true
 configuration_topic_template = "homeassistant/sensor/{device_id}/config"
 state_topic_template = "homeassistant/sensor/{device_id}/state"
 
@@ -15,27 +16,6 @@ model = "Unknown Model"
 [can_bus]
 sender_id = 0x680
 
-[[can_bus.polling_configuration]]
-elster_index = 0x000E
-interval = 60
-start_delay = 1
-
-[[can_bus.polling_configuration]]
-elster_index = 0x01D6
-interval = 60
-start_delay = 2
-
-[[can_bus.polling_configuration]]
-elster_index = 0x091C
-interval = 60
-start_delay = 3
-
-[[can_bus.polling_configuration]]
-elster_index = 0x0920
-interval = 60
-start_delay = 4
-
-[[can_bus.polling_configuration]]
-elster_index = 0xC0F9
-interval = 60
-start_delay = 5
+[can_bus.default_register_configuration]
+polling_enabled = true
+polling_interval = 60.0

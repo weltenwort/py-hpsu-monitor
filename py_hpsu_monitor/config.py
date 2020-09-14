@@ -4,8 +4,6 @@ from typing import List, Optional
 from pydantic import BaseModel
 import tomlkit
 
-from .workers.elster_register_canbus_poller import RegisterPollingConfiguration
-
 
 def load_default_configuration():
     return PyHpsuMonitorConfig()
@@ -22,9 +20,23 @@ def load_configuration_from_text(config_file_text: str) -> "PyHpsuMonitorConfig"
     return PyHpsuMonitorConfig.parse_obj(dict(tomlkit.parse(config_file_text)))
 
 
+class DefaultRegisterConfiguration(BaseModel):
+    polling_enabled: bool = True
+    polling_interval: float = 60.0
+
+
+class RegisterConfiguration(BaseModel):
+    elster_index: int
+    polling_enabled: Optional[bool]
+    polling_interval: Optional[float]
+
+
 class CanBusConfig(BaseModel):
     sender_id: int = 0x680
-    polling_configuration: List[RegisterPollingConfiguration] = []
+    default_register_configuration: DefaultRegisterConfiguration = (
+        DefaultRegisterConfiguration()
+    )
+    register_configuration: List[RegisterConfiguration] = []
 
     class Config:
         allow_mutation = False
@@ -45,6 +57,7 @@ class MqttDeviceConfig(BaseModel):
 
 
 class MqttConfig(BaseModel):
+    enabled: bool = True
     configuration_topic_template: str = "homeassistant/sensor/{device_id}/config"
     state_topic_template: str = "homeassistant/sensor/{device_id}/state"
 
