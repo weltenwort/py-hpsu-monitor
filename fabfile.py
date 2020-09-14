@@ -11,7 +11,9 @@ def deploy(c, version):
     source_archive_basename = f"{versioned_project_name}.tar.gz"
     source_archive_path = pathlib.Path("dist", source_archive_basename)
     c.put(source_archive_path, source_archive_basename)
-    c.run(f"rm -R {versioned_project_name}")
+    c.run(
+        f"if [ -e '{versioned_project_name}' ]; then rm -R {versioned_project_name}; fi"
+    )
     c.run(f"tar -xzf {source_archive_basename}")
     with c.cd(versioned_project_name):
         c.run("~/.poetry/bin/poetry env use 3.7")
