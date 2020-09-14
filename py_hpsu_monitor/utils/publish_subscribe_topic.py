@@ -17,7 +17,7 @@ class PublishSubscribeTopic(Generic[PublishSubscribeMessage]):
         await gather(*[queue.join() for queue in self.queues])
 
     async def items(self):
-        queue = Queue()  # type: Queue[PublishSubscribeMessage]
+        queue: Queue[PublishSubscribeMessage] = Queue()
         self.queues.add(queue)
 
         try:

@@ -1,25 +1,34 @@
+import asyncio
 import json
 import mock
 
 import asyncio_mqtt
 import pytest
 
-from ...config import MqttBrokerConfig, MqttConfig
+from ...config import MqttBrokerConfig, MqttConfig, MqttDeviceConfig
 from ...utils.publish_subscribe_topic import PublishSubscribeTopic
 from ..elster_register_mqtt_logger import mqtt_log_elster_registers
 
 
 @pytest.mark.asyncio
-async def test_mqtt_logger_publishes_autodiscovery():
-    elster_frames_topic = PublishSubscribeTopic()
+async def test_mqtt_logger_publishes_autodiscovery(event_loop):
+    elster_frames_topic = mock.create_autospec(
+        PublishSubscribeTopic, instance=True, spec_set=True
+    )
+
     mqtt_client = mock.create_autospec(
         spec=asyncio_mqtt.Client, instance=True, spec_set=True
     )
     mqtt_config = MqttConfig(
-        device_id="test-device-id",
         configuration_topic_template="test/sensor/{device_id}/config",
         state_topic_template="test/sensor/{device_id}/state",
         broker=MqttBrokerConfig(hostname="localhost"),
+        device=MqttDeviceConfig(
+            id="test-device-id",
+            model="test-model",
+            name="test-name",
+            manufacturer="test-manufacturer",
+        ),
     )
 
     await mqtt_log_elster_registers(
@@ -31,12 +40,21 @@ async def test_mqtt_logger_publishes_autodiscovery():
     mqtt_client.publish.assert_has_calls(
         [
             mock.call(
-                topic="test/sensor/test-device-id-t_dhw/config",
+                topic="test/sensor/test-device-id-temp-speicher-ist-t-dhw/config",
                 payload=json.dumps(
                     {
-                        "name": "test-device-id-t_dhw",
-                        "state_topic": "test/sensor/test-device-id-t_dhw/state",
+                        "name": "test-device-id-temp-speicher-ist-t-dhw",
+                        "state_topic": "test/sensor/test-device-id-temp-speicher-ist-t-dhw/state",
+                        "value_template": "{{ value_json.value }}",
+                        "device": {
+                            "identifiers": ["test-device-id"],
+                            "manufacturer": "test-manufacturer",
+                            "model": "test-model",
+                            "name": "test-name",
+                        },
+                        "unique_id": "test-device-id-temp-speicher-ist-t-dhw",
                         "unit_of_measurement": "°C",
+                        "device_class": "temperature",
                     }
                 ),
             )
