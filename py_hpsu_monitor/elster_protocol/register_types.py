@@ -21,6 +21,7 @@ class BaseRegisterDefinition(BaseModel, ABC):
     kind: Literal["register"] = "register"
     elster_index: int
     name: str
+    owner_id: int
 
     class Config:
         allow_mutation = False

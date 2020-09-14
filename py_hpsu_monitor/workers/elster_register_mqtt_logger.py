@@ -1,13 +1,11 @@
 import json
+from typing import List
 
 import asyncio_mqtt
 
 from ..config import MqttConfig
 from ..elster_protocol.elster_frame import ElsterFrame, ElsterReadResponseFrame
-from ..elster_protocol.register_definitions import (
-    register_definitions,
-    register_definitions_by_index,
-)
+from ..elster_protocol.register_definitions import group_register_definitions_by_index
 from ..elster_protocol.register_types import (
     NumberRegisterDefinition,
     RegisterDefinition,
@@ -20,7 +18,12 @@ async def mqtt_log_elster_registers(
     elster_frames: PublishSubscribeTopic[ElsterFrame],
     mqtt_client: asyncio_mqtt.Client,
     mqtt_config: MqttConfig,
+    register_definitions: List[RegisterDefinition],
 ):
+    register_definitions_by_index = group_register_definitions_by_index(
+        register_definitions
+    )
+
     for register_definition in register_definitions:
         configuration_topic = get_configuration_topic(mqtt_config, register_definition)
         configuration_payload = get_configuration_payload(

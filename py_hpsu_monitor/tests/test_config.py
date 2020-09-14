@@ -24,7 +24,6 @@ def test_load_configuration_from_text():
         [[can_bus.polling_configuration]]
         elster_index = 0x000E
         interval = 30
-        receiver_id = 0x180
         start_delay = 1
         """
         )
@@ -33,7 +32,6 @@ def test_load_configuration_from_text():
     assert configuration.can_bus.sender_id == 0x900
     assert configuration.can_bus.polling_configuration[0].elster_index == 0x000E
     assert configuration.can_bus.polling_configuration[0].interval == 30
-    assert configuration.can_bus.polling_configuration[0].receiver_id == 0x180
 
 
 def test_fail_to_load_configuration_from_text():
@@ -45,7 +43,6 @@ def test_fail_to_load_configuration_from_text():
             sender_id = 0x900
 
             [[can_bus.polling_configuration]]
-            elster_index = 0x000E
             interval = 30
             """
             )

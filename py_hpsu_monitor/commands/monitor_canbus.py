@@ -6,6 +6,7 @@ import can
 
 from ..config import MqttConfig
 from ..elster_protocol.elster_frame import ElsterFrame
+from ..elster_protocol.register_types import RegisterDefinition
 from ..utils.publish_subscribe_topic import PublishSubscribeTopic
 from ..utils.shutting_down import shutting_down
 from ..workers.elster_canbus_reader import read_elster_canbus
@@ -25,6 +26,7 @@ async def run_monitor_canbus(
     log_frames: bool = False,
     log_registers: bool = False,
     polling_configurations: List[RegisterPollingConfiguration] = [],
+    register_definitions: List[RegisterDefinition] = [],
 ):
     elster_frames: PublishSubscribeTopic[ElsterFrame] = PublishSubscribeTopic()
 
@@ -33,24 +35,28 @@ async def run_monitor_canbus(
     ) as bus:
         async with asyncio_mqtt.Client(
             hostname=mqtt_config.broker.hostname,
-            port=mqtt_config.broker.port,
+            port=int(mqtt_config.broker.port) if mqtt_config.broker.port else None,
             username=mqtt_config.broker.username,
             password=mqtt_config.broker.password,
         ) as mqtt_client:
             await asyncio.gather(
                 log_elster_frames(topic=elster_frames) if log_frames else async_noop(),
-                log_elster_registers(topic=elster_frames)
+                log_elster_registers(
+                    topic=elster_frames, register_definitions=register_definitions
+                )
                 if log_registers
                 else async_noop(),
                 mqtt_log_elster_registers(
                     elster_frames=elster_frames,
                     mqtt_client=mqtt_client,
                     mqtt_config=mqtt_config,
+                    register_definitions=register_definitions,
                 ),
                 read_elster_canbus(topic=elster_frames, bus=bus),
                 poll_elster_registers_canbus(
                     bus=bus,
                     polling_configurations=polling_configurations,
+                    register_definitions=register_definitions,
                     sender_id=sender_id,
                 ),
             )

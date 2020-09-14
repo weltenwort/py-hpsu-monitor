@@ -1,0 +1,36 @@
+[[register_definitions]]
+  elster_index = 0x000E
+  factor = 0.1
+  kind = "number"
+  name = "temp-speicher-ist-t-dhw"
+  owner_id = 0x180
+  unit = "°C"
+
+[[register_definitions]]
+  elster_index = 0x01D6
+  factor = 0.1
+  kind = "number"
+  name = "temp-speicher-ist-t-hs"
+  owner_id = 0x180
+  unit = "°C"
+
+[[register_definitions]]
+  elster_index = 0x091C
+  kind = "number"
+  name = "energie-aufnahme-ehs-ww"
+  owner_id = 0x180
+  unit = "kWh"
+
+[[register_definitions]]
+  elster_index = 0x0920
+  kind = "number"
+  name = "energie-aufnahme-ehs-hz"
+  owner_id = 0x180
+  unit = "kWh"
+
+[[register_definitions]]
+  elster_index = 0xC0F9
+  kind = "number"
+  name = "leistung-ehs"
+  owner_id = 0x180
+  unit = "W"

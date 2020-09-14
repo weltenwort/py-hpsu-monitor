@@ -18,29 +18,24 @@ sender_id = 0x680
 [[can_bus.polling_configuration]]
 elster_index = 0x000E
 interval = 60
-receiver_id = 0x180
 start_delay = 1
 
 [[can_bus.polling_configuration]]
 elster_index = 0x01D6
 interval = 60
-receiver_id = 0x180
 start_delay = 2
 
 [[can_bus.polling_configuration]]
 elster_index = 0x091C
 interval = 60
-receiver_id = 0x180
 start_delay = 3
 
 [[can_bus.polling_configuration]]
 elster_index = 0x0920
 interval = 60
-receiver_id = 0x180
 start_delay = 4
 
 [[can_bus.polling_configuration]]
 elster_index = 0xC0F9
 interval = 60
-receiver_id = 0x180
 start_delay = 5

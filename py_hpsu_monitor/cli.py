@@ -1,15 +1,19 @@
 import asyncio
 from pathlib import Path
-from py_hpsu_monitor.config import (
-    load_configuration_from_file_path,
-    load_default_configuration,
-)
 from typing import Optional
 
 import typer
 
 from .commands.parse_candump import run_parse_candump
 from .commands.monitor_canbus import run_monitor_canbus
+from .config import (
+    load_configuration_from_file_path,
+    load_default_configuration,
+)
+from .elster_protocol.register_definitions import (
+    load_default_register_definitions,
+    load_register_definitions_from_file_path,
+)
 
 app = typer.Typer()
 
@@ -17,7 +21,18 @@ app = typer.Typer()
 @app.command()
 def run(
     can_interface: str = typer.Option("can0", help="CAN bus interface to monitor"),
-    config_file: Optional[Path] = typer.Option(None),
+    config_file: Optional[Path] = typer.Option(
+        None,
+        dir_okay=False,
+        exists=True,
+    ),
+    register_definition_file: Optional[Path] = typer.Option(
+        Path(__file__).resolve().parent
+        / "elster_protocol"
+        / "register_definitions.toml",
+        dir_okay=False,
+        exists=True,
+    ),
     log_frames: bool = typer.Option(False, "--log-frames"),
     log_registers: bool = typer.Option(False, "--log-registers"),
 ):
@@ -27,6 +42,12 @@ def run(
         else load_default_configuration()
     )
 
+    register_definitions = (
+        load_register_definitions_from_file_path(register_definition_file)
+        if register_definition_file
+        else load_default_register_definitions()
+    )
+
     asyncio.run(
         run_monitor_canbus(
             can_interface=can_interface,
@@ -34,6 +55,7 @@ def run(
             log_registers=log_registers,
             mqtt_config=configuration.mqtt,
             polling_configurations=configuration.can_bus.polling_configuration,
+            register_definitions=register_definitions,
             sender_id=configuration.can_bus.sender_id,
         )
     )

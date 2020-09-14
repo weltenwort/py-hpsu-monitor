@@ -1,39 +1,37 @@
+from pathlib import Path
 from typing import List
 
-from .register_types import NumberRegisterDefinition, BaseRegisterDefinition
+from pydantic import BaseModel
+import tomlkit
+
+from .register_types import (
+    # NumberRegisterDefinition,
+    RegisterDefinition,
+)
 
 
-register_definitions: List[BaseRegisterDefinition] = [
-    NumberRegisterDefinition(
-        elster_index=0x000E,
-        name="temp-speicher-ist-t-dhw",
-        factor=0.1,
-        unit="°C",
-    ),
-    NumberRegisterDefinition(
-        elster_index=0x01D6,
-        name="temp-vorlauf-ist-t-hs",
-        factor=0.1,
-        unit="°C",
-    ),
-    NumberRegisterDefinition(
-        elster_index=0x091C,
-        name="energie-aufnahme-ehs-ww",
-        unit="kWh",
-    ),
-    NumberRegisterDefinition(
-        elster_index=0x0920,
-        name="energie-aufnahme-ehs-hz",
-        unit="kWh",
-    ),
-    NumberRegisterDefinition(
-        elster_index=0xC0F9,
-        name="leistung-ehs",
-        unit="W",
-    ),
-]
+class RegisterDefinitions(BaseModel):
+    register_definitions: List[RegisterDefinition] = []
 
 
-register_definitions_by_index = {
-    definition.elster_index: definition for definition in register_definitions
-}
+def load_default_register_definitions():
+    return RegisterDefinitions()
+
+
+def load_register_definitions_from_file_path(definition_file_path: Path):
+    if not definition_file_path.is_file():
+        return load_default_register_definitions().register_definitions
+
+    return load_register_definitions_from_text(
+        definition_file_path.read_text()
+    ).register_definitions
+
+
+def load_register_definitions_from_text(
+    definition_file_text: str,
+) -> RegisterDefinitions:
+    return RegisterDefinitions.parse_obj(dict(tomlkit.parse(definition_file_text)))
+
+
+def group_register_definitions_by_index(register_definitions: List[RegisterDefinition]):
+    return {definition.elster_index: definition for definition in register_definitions}
