@@ -34,7 +34,7 @@
   elster_index = 0x01D6
   factor = 0.1
   kind = "number"
-  name = "temp-speicher-ist-t-hs"
+  name = "temp-vorlauf-ist-t-hs"
   owner_id = 0x180
   unit = "°C"
 
