@@ -10,7 +10,7 @@
   elster_index = 0x000D
   factor = 0.1
   kind = "number"
-  name = "temp-vorlauf"
+  name = "temp-vorlauf-hz"
   owner_id = 0x180
   unit = "°C"
 
@@ -49,6 +49,20 @@
   elster_index = 0x0920
   kind = "number"
   name = "energie-aufnahme-ehs-hz"
+  owner_id = 0x180
+  unit = "kWh"
+
+[[register_definitions]]
+  elster_index = 0x092c
+  kind = "number"
+  name = "energie-ertrag-ww"
+  owner_id = 0x180
+  unit = "kWh"
+
+[[register_definitions]]
+  elster_index = 0x0930
+  kind = "number"
+  name = "energie-ertrag-hz"
   owner_id = 0x180
   unit = "kWh"
 
