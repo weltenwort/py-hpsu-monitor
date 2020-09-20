@@ -31,12 +31,54 @@
   unit = "°C"
 
 [[register_definitions]]
+  elster_index = 0x01DA
+  kind = "number"
+  name = "durchfluss-hz"
+  owner_id = 0x180
+  unit = "l/h"
+
+[[register_definitions]]
   elster_index = 0x01D6
   factor = 0.1
   kind = "number"
   name = "temp-vorlauf-ist-t-hs"
   owner_id = 0x180
   unit = "°C"
+
+[[register_definitions]]
+  elster_index = 0x069B
+  kind = "number"
+  name = "position-mischer-dhw"
+  owner_id = 0x180
+  unit = "%"
+
+[[register_definitions]]
+  elster_index = 0x06A4
+  kind = "number"
+  name = "laufzeit-umwaelzpumpe"
+  owner_id = 0x180
+  unit = "h"
+
+[[register_definitions]]
+  elster_index = 0x06A5
+  kind = "number"
+  name = "laufzeit-verdichter"
+  owner_id = 0x180
+  unit = "h"
+
+[[register_definitions]]
+  elster_index = 0x06A6
+  kind = "number"
+  name = "energie-aufnahme-wp-kuehlen"
+  owner_id = 0x180
+  unit = "kWh"
+
+[[register_definitions]]
+  elster_index = 0x06A7
+  kind = "number"
+  name = "energie-aufnahme-wp-heizen"
+  owner_id = 0x180
+  unit = "kWh"
 
 [[register_definitions]]
   elster_index = 0x091C
@@ -67,8 +109,54 @@
   unit = "kWh"
 
 [[register_definitions]]
+  elster_index = 0xC0B4
+  factor = 0.05
+  kind = "number"
+  name = "wasserdruck"
+  owner_id = 0x180
+  unit = "bar"
+
+[[register_definitions]]
+  elster_index = 0xC0F7
+  kind = "number"
+  name = "staerke-umwaelzpumpe"
+  owner_id = 0x180
+  unit = "%"
+
+[[register_definitions]]
   elster_index = 0xC0F9
   kind = "number"
   name = "leistung-ehs"
   owner_id = 0x180
   unit = "W"
+
+[[register_definitions]]
+  elster_index = 0xC0FB
+  kind = "number"
+  name = "position-mischer-b1"
+  owner_id = 0x180
+  unit = "%"
+
+[[register_definitions]]
+  elster_index = 0xC0FC
+  factor = 0.1
+  kind = "number"
+  name = "temp-vorlauf-waermetauscher-ist-tv2"
+  owner_id = 0x180
+  unit = "°C"
+
+[[register_definitions]]
+  elster_index = 0xC102
+  factor = 0.1
+  kind = "number"
+  name = "temp-vorlauf-ehs-ist-tvbh2"
+  owner_id = 0x180
+  unit = "°C"
+
+[[register_definitions]]
+  elster_index = 0xC103
+  factor = 0.1
+  kind = "number"
+  name = "temp-kaeltemittel"
+  owner_id = 0x180
+  unit = "°C"
