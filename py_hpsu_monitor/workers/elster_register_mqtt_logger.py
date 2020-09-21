@@ -30,7 +30,7 @@ async def mqtt_log_elster_registers(
             mqtt_config, register_definition
         )
         await mqtt_client.publish(
-            topic=configuration_topic, payload=configuration_payload
+            topic=configuration_topic, payload=configuration_payload, retain=True
         )
 
     async for frame in elster_frames.items():
@@ -45,7 +45,9 @@ async def mqtt_log_elster_registers(
             state_topic = get_state_topic(mqtt_config, register_value.register_type)
             state_payload = get_state_payload(register_value)
 
-            await mqtt_client.publish(topic=state_topic, payload=state_payload)
+            await mqtt_client.publish(
+                topic=state_topic, payload=state_payload, retain=True
+            )
 
 
 def get_configuration_payload(

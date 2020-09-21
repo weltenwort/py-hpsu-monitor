@@ -68,6 +68,7 @@ async def test_mqtt_logger_publishes_autodiscovery(event_loop):
                         "device_class": "temperature",
                     }
                 ),
+                retain=True,
             )
         ]
     )
