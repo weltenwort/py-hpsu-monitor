@@ -1,4 +1,12 @@
 [[register_definitions]]
+  elster_index = 0x0002
+  factor = 0.1
+  kind = "number"
+  name = "temp-vorlauf-soll"
+  owner_id = 0x180
+  unit = "°C"
+
+[[register_definitions]]
   elster_index = 0x000C
   factor = 0.1
   kind = "number"
