@@ -38,3 +38,7 @@ version-resolver:
     labels:
       - "patch version"
   default: minor
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+exclude-labels:
+  - 'skip changelog'
