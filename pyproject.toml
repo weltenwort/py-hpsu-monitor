@@ -7,7 +7,7 @@ include = ["default-config.toml"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-python-can = "^3.3.3"
+python-can = "^3.3.4"
 typer = "^0.3.2"
 tomlkit = "^0.7.0"
 typing_extensions = "^3.7.4"
