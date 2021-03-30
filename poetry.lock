@@ -16,7 +16,7 @@ python-versions = "*"
 
 [[package]]
 name = "astroid"
-version = "2.5.1"
+version = "2.5.2"
 description = "An abstract syntax tree for Python with inference support."
 category = "dev"
 optional = false
@@ -366,14 +366,14 @@ email = ["email-validator (>=1.0.3)"]
 
 [[package]]
 name = "pylint"
-version = "2.7.2"
+version = "2.7.4"
 description = "python code static checker"
 category = "dev"
 optional = false
 python-versions = "~=3.6"
 
 [package.dependencies]
-astroid = ">=2.5.1,<2.6"
+astroid = ">=2.5.2,<2.7"
 colorama = {version = "*", markers = "sys_platform == \"win32\""}
 isort = ">=4.2.5,<6"
 mccabe = ">=0.6,<0.7"
@@ -587,7 +587,7 @@ deploy = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "f88fcad90d9ebcf28efa00dbc0b094a7f95b0839815f034f7f2155ba530f97a5"
+content-hash = "43b70bc6086f69e94949d0d5618ffc46d5178e6586ac5468fd654183618cffc0"
 
 [metadata.files]
 aenum = [
@@ -600,8 +600,8 @@ appdirs = [
     {file = "appdirs-1.4.4.tar.gz", hash = "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41"},
 ]
 astroid = [
-    {file = "astroid-2.5.1-py3-none-any.whl", hash = "sha256:21d735aab248253531bb0f1e1e6d068f0ee23533e18ae8a6171ff892b98297cf"},
-    {file = "astroid-2.5.1.tar.gz", hash = "sha256:cfc35498ee64017be059ceffab0a25bedf7548ab76f2bea691c5565896e7128d"},
+    {file = "astroid-2.5.2-py3-none-any.whl", hash = "sha256:cd80bf957c49765dce6d92c43163ff9d2abc43132ce64d4b1b47717c6d2522df"},
+    {file = "astroid-2.5.2.tar.gz", hash = "sha256:6b0ed1af831570e500e2437625979eaa3b36011f66ddfc4ce930128610258ca9"},
 ]
 asyncio-mqtt = [
     {file = "asyncio_mqtt-0.8.1-py3-none-any.whl", hash = "sha256:7f9d1a03a4763b6fefe43ee4f33155b35e68bf0b77adc290fc7ed69a30840a67"},
@@ -807,8 +807,8 @@ pydantic = [
     {file = "pydantic-1.8.1.tar.gz", hash = "sha256:26cf3cb2e68ec6c0cfcb6293e69fb3450c5fd1ace87f46b64f678b0d29eac4c3"},
 ]
 pylint = [
-    {file = "pylint-2.7.2-py3-none-any.whl", hash = "sha256:d09b0b07ba06bcdff463958f53f23df25e740ecd81895f7d2699ec04bbd8dc3b"},
-    {file = "pylint-2.7.2.tar.gz", hash = "sha256:0e21d3b80b96740909d77206d741aa3ce0b06b41be375d92e1f3244a274c1f8a"},
+    {file = "pylint-2.7.4-py3-none-any.whl", hash = "sha256:209d712ec870a0182df034ae19f347e725c1e615b2269519ab58a35b3fcbbe7a"},
+    {file = "pylint-2.7.4.tar.gz", hash = "sha256:bd38914c7731cdc518634a8d3c5585951302b6e2b6de60fbb3f7a0220e21eeee"},
 ]
 pynacl = [
     {file = "PyNaCl-1.4.0-cp27-cp27m-macosx_10_10_x86_64.whl", hash = "sha256:ea6841bc3a76fa4942ce00f3bda7d436fda21e2d91602b9e21b7ca9ecab8f3ff"},
