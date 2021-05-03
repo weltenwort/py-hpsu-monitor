@@ -12,7 +12,7 @@ typer = "^0.3.2"
 tomlkit = "^0.7.0"
 typing_extensions = "^3.10.0"
 pydantic = "^1.8.1"
-asyncio-mqtt = "^0.8.1"
+asyncio-mqtt = "^0.9.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
