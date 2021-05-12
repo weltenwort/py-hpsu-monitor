@@ -11,7 +11,7 @@ python-can = "^3.3.4"
 typer = "^0.3.2"
 tomlkit = "^0.7.0"
 typing_extensions = "^3.10.0"
-pydantic = "^1.8.1"
+pydantic = "^1.8.2"
 asyncio-mqtt = "^0.9.0"
 
 [tool.poetry.dev-dependencies]
