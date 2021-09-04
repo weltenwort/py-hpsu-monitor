@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: ${{ matrix.python_version }}
       - name: Setup poetry
-        uses: Gr1N/setup-poetry@v6
+        uses: Gr1N/setup-poetry@v7
         with:
           poetry-version: ${{ matrix.poetry_version }}
       - uses: actions/cache@v2.1.5
