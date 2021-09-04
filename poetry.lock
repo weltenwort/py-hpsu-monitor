@@ -78,7 +78,7 @@ typecheck = ["mypy"]
 
 [[package]]
 name = "black"
-version = "21.4b2"
+version = "21.7b0"
 description = "The uncompromising code formatter."
 category = "dev"
 optional = false
@@ -90,14 +90,15 @@ click = ">=7.1.2"
 mypy-extensions = ">=0.4.3"
 pathspec = ">=0.8.1,<1"
 regex = ">=2020.1.8"
-toml = ">=0.10.1"
+tomli = ">=0.2.6,<2.0.0"
 typed-ast = {version = ">=1.4.2", markers = "python_version < \"3.8\""}
 typing-extensions = {version = ">=3.7.4", markers = "python_version < \"3.8\""}
 
 [package.extras]
 colorama = ["colorama (>=0.4.3)"]
-d = ["aiohttp (>=3.3.2)", "aiohttp-cors"]
+d = ["aiohttp (>=3.6.0)", "aiohttp-cors (>=0.4.0)"]
 python2 = ["typed-ast (>=1.4.2)"]
+uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "cffi"
@@ -497,6 +498,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "tomli"
+version = "1.2.1"
+description = "A lil' TOML parser"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "tomlkit"
 version = "0.7.2"
 description = "Style preserving TOML library"
@@ -585,7 +594,7 @@ deploy = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "8539f2670e3dd060bd2b74e0030d8f676c36fe45c468b44b15361c82341b9d98"
+content-hash = "fdce69bffea24f9e9a1cb0b1b7ed4df57e1cf0cbdafbb9f27091a947bbe53439"
 
 [metadata.files]
 aenum = [
@@ -623,8 +632,8 @@ bcrypt = [
     {file = "bcrypt-3.2.0.tar.gz", hash = "sha256:5b93c1726e50a93a033c36e5ca7fdcd29a5c7395af50a6892f5d9e7c6cfbfb29"},
 ]
 black = [
-    {file = "black-21.4b2-py3-none-any.whl", hash = "sha256:bff7067d8bc25eb21dcfdbc8c72f2baafd9ec6de4663241a52fb904b304d391f"},
-    {file = "black-21.4b2.tar.gz", hash = "sha256:fc9bcf3b482b05c1f35f6a882c079dc01b9c7795827532f4cc43c0ec88067bbc"},
+    {file = "black-21.7b0-py3-none-any.whl", hash = "sha256:1c7aa6ada8ee864db745b22790a32f94b2795c253a75d6d9b5e439ff10d23116"},
+    {file = "black-21.7b0.tar.gz", hash = "sha256:c8373c6491de9362e39271630b65b964607bc5c79c83783547d76c839b3aa219"},
 ]
 cffi = [
     {file = "cffi-1.14.2-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:da9d3c506f43e220336433dffe643fbfa40096d408cb9b7f2477892f369d5f82"},
@@ -877,6 +886,10 @@ six = [
 toml = [
     {file = "toml-0.10.1-py2.py3-none-any.whl", hash = "sha256:bda89d5935c2eac546d648028b9901107a595863cb36bae0c73ac804a9b4ce88"},
     {file = "toml-0.10.1.tar.gz", hash = "sha256:926b612be1e5ce0634a2ca03470f95169cf16f939018233a670519cb4ac58b0f"},
+]
+tomli = [
+    {file = "tomli-1.2.1-py3-none-any.whl", hash = "sha256:8dd0e9524d6f386271a36b41dbf6c57d8e32fd96fd22b6584679dc569d20899f"},
+    {file = "tomli-1.2.1.tar.gz", hash = "sha256:a5b75cb6f3968abb47af1b40c1819dc519ea82bcc065776a866e8d74c5ca9442"},
 ]
 tomlkit = [
     {file = "tomlkit-0.7.2-py2.py3-none-any.whl", hash = "sha256:173ad840fa5d2aac140528ca1933c29791b79a374a0861a80347f42ec9328117"},
