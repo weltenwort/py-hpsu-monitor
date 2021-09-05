@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "py-hpsu-monitor"
-version = "0.3.0"
+version = "0.4.0"
 description = ""
 authors = ["Felix Stürmer <stuermer@weltenwort.de>"]
 include = ["default-config.toml"]
