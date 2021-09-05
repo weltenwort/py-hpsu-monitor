@@ -117,8 +117,8 @@
   unit = "kWh"
 
 [[register_definitions]]
-  elster_index = 0xC0B4
-  factor = 0.05
+  elster_index = 0x001C
+  factor = 0.001
   kind = "number"
   name = "wasserdruck"
   owner_id = 0x180
