@@ -118,11 +118,10 @@
 
 [[register_definitions]]
   elster_index = 0x001C
-  factor = 0.001
   kind = "number"
   name = "wasserdruck"
   owner_id = 0x180
-  unit = "bar"
+  unit = "mbar"
 
 [[register_definitions]]
   elster_index = 0xC0F7

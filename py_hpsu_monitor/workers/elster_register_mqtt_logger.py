@@ -133,6 +133,7 @@ device_class_by_unit = {
     "kW": "power",
     "Wh": "energy",
     "kWh": "energy",
+    "mbar": "pressure",
 }
 
 state_class_by_unit = {
@@ -141,4 +142,5 @@ state_class_by_unit = {
     "kW": "measurement",
     "Wh": "total_increasing",
     "kWh": "total_increasing",
+    "mbar": "measurement",
 }
