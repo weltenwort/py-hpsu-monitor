@@ -66,6 +66,7 @@ async def test_mqtt_logger_publishes_autodiscovery(event_loop):
                         "unique_id": "test-device-id-test-number-register",
                         "unit_of_measurement": "°C",
                         "device_class": "temperature",
+                        "state_class": "measurement",
                     }
                 ),
                 retain=True,
