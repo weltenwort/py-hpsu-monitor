@@ -1,4 +1,5 @@
 import asyncio
+from typing import AsyncIterable, cast
 
 import can
 
@@ -14,6 +15,6 @@ async def read_elster_canbus(topic: PublishSubscribeTopic[ElsterFrame], bus: can
     with stopping(
         can.Notifier(bus=bus, listeners=[reader], loop=asyncio.get_event_loop())
     ):
-        async for message in reader:
+        async for message in cast(AsyncIterable[can.Message], reader):
             elster_frame = parse_can_message(message)
             topic.publish(elster_frame)

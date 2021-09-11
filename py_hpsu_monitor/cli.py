@@ -1,3 +1,4 @@
+# pyright: reportUnknownMemberType=warning
 import asyncio
 from pathlib import Path
 from typing import Optional
@@ -44,7 +45,7 @@ def run(
         load_register_definitions_from_file_path(register_definition_file)
         if register_definition_file
         else load_default_register_definitions()
-    )
+    ).register_definitions
 
     asyncio.run(
         run_monitor_canbus(

@@ -1,5 +1,6 @@
+# pyright: reportUnnecessaryIsInstance=warning
 import json
-from typing import List
+from typing import Any, Dict, List
 
 import asyncio_mqtt
 
@@ -74,7 +75,7 @@ def get_configuration_payload(
     )
 
 
-def get_state_payload(register_value: RegisterValue):
+def get_state_payload(register_value: RegisterValue[Any]):
     return json.dumps(
         {"timestamp": register_value.timestamp, "value": register_value.value}
     )
@@ -98,7 +99,7 @@ def get_sensor_name(mqtt_config: MqttConfig, register_definition: RegisterDefini
     return f"{mqtt_config.device.id}-{register_definition.name}"
 
 
-def get_device_class(register_definition: RegisterDefinition):
+def get_device_class(register_definition: RegisterDefinition) -> Dict[str, Any]:
     if (
         isinstance(register_definition, NumberRegisterDefinition)
         and register_definition.unit

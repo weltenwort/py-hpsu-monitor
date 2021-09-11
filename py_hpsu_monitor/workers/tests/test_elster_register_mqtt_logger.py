@@ -12,7 +12,9 @@ from ..elster_register_mqtt_logger import mqtt_log_elster_registers
 
 
 @pytest.mark.asyncio
-async def test_mqtt_logger_publishes_autodiscovery(event_loop):
+async def test_mqtt_logger_publishes_autodiscovery(
+    event_loop: asyncio.AbstractEventLoop,
+):
     elster_frames_topic = mock.create_autospec(
         PublishSubscribeTopic, instance=True, spec_set=True
     )

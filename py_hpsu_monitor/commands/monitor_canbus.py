@@ -52,7 +52,7 @@ async def run_monitor_canbus(
     ) as bus:
         async with asyncio_mqtt.Client(
             hostname=mqtt_config.broker.hostname,
-            port=int(mqtt_config.broker.port) if mqtt_config.broker.port else None,
+            port=int(mqtt_config.broker.port) if mqtt_config.broker.port else 1883,
             username=mqtt_config.broker.username,
             password=mqtt_config.broker.password,
         ) as mqtt_client:
@@ -92,9 +92,10 @@ def create_register_polling_configuration(
     return RegisterPollingConfiguration(
         register_definition=register_definition,
         enabled=register_configuration.polling_enabled
-        if register_configuration and register_configuration.polling_enabled != None
+        if register_configuration and register_configuration.polling_enabled is not None
         else default_register_configuration.polling_enabled,
         interval=register_configuration.polling_interval
-        if register_configuration and register_configuration.polling_interval != None
+        if register_configuration
+        and register_configuration.polling_interval is not None
         else default_register_configuration.polling_interval,
     )

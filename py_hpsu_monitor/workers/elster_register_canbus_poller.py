@@ -1,5 +1,5 @@
 import asyncio
-from typing import List
+from typing import Callable, List, cast
 
 import can
 from pydantic import BaseModel
@@ -40,8 +40,10 @@ async def poll_elster_register(
 ):
     await asyncio.sleep(start_delay)
 
+    sendMessage = cast(Callable[[can.Message], None], bus.send)  # type: ignore
+
     while True:
-        bus.send(
+        sendMessage(
             create_can_message(
                 ElsterReadRequestFrame(
                     timestamp=0,

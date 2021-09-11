@@ -10,7 +10,7 @@ test_data_dir = Path(__file__).resolve().parent / "data"
 def test_load_number_register_definitions_from_file_path():
     register_definitions = load_register_definitions_from_file_path(
         test_data_dir / "test_register_definitions.toml"
-    )
+    ).register_definitions
 
     assert (
         NumberRegisterDefinition(

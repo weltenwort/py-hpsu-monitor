@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Optional, TypeVar, Union
+from typing import Any, Generic, Optional, TypeVar, Union
 
 from pydantic import BaseModel
 from typing_extensions import Literal
@@ -11,14 +11,14 @@ ValueType = TypeVar("ValueType")
 
 
 @dataclass(frozen=True)
-class RegisterValue:
-    register_type: "BaseRegisterDefinition"
+class RegisterValue(Generic[ValueType]):
+    register_type: "RegisterDefinition"
     timestamp: float
     value: ValueType
 
 
 class BaseRegisterDefinition(BaseModel, ABC):
-    kind: Literal["register"] = "register"
+    kind: str = "register"
     elster_index: int
     name: str
     owner_id: int
@@ -27,7 +27,7 @@ class BaseRegisterDefinition(BaseModel, ABC):
         allow_mutation = False
 
     @abstractmethod
-    def parse_elster_frame(self, frame: ElsterReadResponseFrame) -> RegisterValue:
+    def parse_elster_frame(self, frame: ElsterReadResponseFrame) -> RegisterValue[Any]:
         raise NotImplementedError
 
 

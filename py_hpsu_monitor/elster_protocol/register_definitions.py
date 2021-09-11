@@ -20,11 +20,9 @@ def load_default_register_definitions():
 
 def load_register_definitions_from_file_path(definition_file_path: Path):
     if not definition_file_path.is_file():
-        return load_default_register_definitions().register_definitions
+        return load_default_register_definitions()
 
-    return load_register_definitions_from_text(
-        definition_file_path.read_text()
-    ).register_definitions
+    return load_register_definitions_from_text(definition_file_path.read_text())
 
 
 def load_register_definitions_from_text(
