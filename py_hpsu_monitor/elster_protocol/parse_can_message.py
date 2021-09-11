@@ -8,6 +8,7 @@ from .elster_frame import (
     ElsterReadRequestFrame,
     ElsterReadResponseFrame,
     ElsterFrameType,
+    ElsterWriteFrame,
 )
 
 
@@ -38,6 +39,14 @@ def parse_can_message(message: can.Message) -> ElsterFrame:
         )
     elif frame_type == ElsterFrameType.READ_RESPONSE:
         return ElsterReadResponseFrame(
+            timestamp=timestamp,
+            sender=sender,
+            receiver=receiver,
+            elster_index=elster_index,
+            value=value,
+        )
+    elif frame_type == ElsterFrameType.WRITE:
+        return ElsterWriteFrame(
             timestamp=timestamp,
             sender=sender,
             receiver=receiver,
