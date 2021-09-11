@@ -4,12 +4,10 @@ from typing import Optional
 
 import typer
 
-from .commands.parse_candump import run_parse_candump
+from .commands.generate_can_message import generate_can_message_app
 from .commands.monitor_canbus import run_monitor_canbus
-from .config import (
-    load_configuration_from_file_path,
-    load_default_configuration,
-)
+from .commands.parse_candump import run_parse_candump
+from .config import load_configuration_from_file_path, load_default_configuration
 from .elster_protocol.register_definitions import (
     load_default_register_definitions,
     load_register_definitions_from_file_path,
@@ -65,3 +63,6 @@ def run(
 @app.command()
 def parse_candump():
     asyncio.run(run_parse_candump())
+
+
+app.add_typer(generate_can_message_app, name="generate-message")
