@@ -12,3 +12,11 @@
   name = "test-number-register-without-factor"
   owner_id = 0x180
   unit = "test-unit"
+
+[[register_definitions]]
+  elster_index = 0x0003
+  kind = "number"
+  name = "test-writable-number-register"
+  owner_id = 0x180
+  unit = "test-unit"
+  is_writable = true

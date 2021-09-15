@@ -33,3 +33,7 @@ def load_register_definitions_from_text(
 
 def group_register_definitions_by_index(register_definitions: List[RegisterDefinition]):
     return {definition.elster_index: definition for definition in register_definitions}
+
+
+def group_register_definitions_by_name(register_definitions: List[RegisterDefinition]):
+    return {definition.name: definition for definition in register_definitions}

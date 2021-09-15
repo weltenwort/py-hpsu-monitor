@@ -1,21 +1,27 @@
 import asyncio
-from typing import List, Optional
+from typing import Any, List, Optional
 
 import asyncio_mqtt
 import can
 
-from ..config import MqttConfig, DefaultRegisterConfiguration, RegisterConfiguration
+from ..config import DefaultRegisterConfiguration, MqttConfig, RegisterConfiguration
 from ..elster_protocol.elster_frame import ElsterFrame
-from ..elster_protocol.register_types import RegisterDefinition
+from ..elster_protocol.register_types import (
+    RegisterDefinition,
+    RegisterValue,
+    WritableRegisterDefinition,
+)
 from ..utils.publish_subscribe_topic import PublishSubscribeTopic
 from ..utils.shutting_down import shutting_down
 from ..workers.elster_canbus_reader import read_elster_canbus
+from ..workers.elster_canbus_writer import write_elster_canbus
 from ..workers.elster_frame_logger import log_elster_frames
 from ..workers.elster_register_canbus_poller import (
     RegisterPollingConfiguration,
     poll_elster_registers_canbus,
 )
 from ..workers.elster_register_logger import log_elster_registers
+from ..workers.elster_register_mqtt_listener import mqtt_listen_for_elster_registers
 from ..workers.elster_register_mqtt_logger import mqtt_log_elster_registers
 
 
@@ -30,6 +36,9 @@ async def run_monitor_canbus(
     register_definitions: List[RegisterDefinition] = [],
 ):
     elster_frames: PublishSubscribeTopic[ElsterFrame] = PublishSubscribeTopic()
+    written_register_values: PublishSubscribeTopic[
+        RegisterValue[Any, WritableRegisterDefinition]
+    ] = PublishSubscribeTopic()
 
     register_configurations_by_index = {
         register_configuration.elster_index: register_configuration
@@ -71,11 +80,24 @@ async def run_monitor_canbus(
                 )
                 if mqtt_config.enabled
                 else async_noop(),
+                mqtt_listen_for_elster_registers(
+                    written_register_values=written_register_values,
+                    mqtt_client=mqtt_client,
+                    mqtt_config=mqtt_config,
+                    register_definitions=register_definitions,
+                )
+                if mqtt_config.enabled
+                else async_noop(),
                 read_elster_canbus(topic=elster_frames, bus=bus),
                 poll_elster_registers_canbus(
                     bus=bus,
                     polling_configurations=polling_configurations,
                     sender_id=sender_id,
+                ),
+                write_elster_canbus(
+                    bus=bus,
+                    sender_id=sender_id,
+                    written_register_values=written_register_values,
                 ),
             )
 

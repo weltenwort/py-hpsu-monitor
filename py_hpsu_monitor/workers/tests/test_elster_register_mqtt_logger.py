@@ -6,7 +6,10 @@ import asyncio_mqtt
 import pytest
 
 from ...config import MqttBrokerConfig, MqttConfig, MqttDeviceConfig
-from ...elster_protocol.register_types import NumberRegisterDefinition
+from ...elster_protocol.register_types import (
+    ReadonlyNumberRegisterDefinition,
+    RegisterDefinition,
+)
 from ...utils.publish_subscribe_topic import PublishSubscribeTopic
 from ..elster_register_mqtt_logger import mqtt_log_elster_registers
 
@@ -23,8 +26,9 @@ async def test_mqtt_logger_publishes_autodiscovery(
         spec=asyncio_mqtt.Client, instance=True, spec_set=True
     )
     mqtt_config = MqttConfig(
-        configuration_topic_template="test/sensor/{device_id}/config",
-        state_topic_template="test/sensor/{device_id}/state",
+        configuration_topic_template="test/sensor/{object_id}/config",
+        state_topic_template="test/sensor/{object_id}/state",
+        write_topic_template="test/writable-sensor/{device_id}/write",
         broker=MqttBrokerConfig(hostname="localhost"),
         device=MqttDeviceConfig(
             id="test-device-id",
@@ -33,8 +37,8 @@ async def test_mqtt_logger_publishes_autodiscovery(
             manufacturer="test-manufacturer",
         ),
     )
-    register_definitions = [
-        NumberRegisterDefinition(
+    register_definitions: list[RegisterDefinition] = [
+        ReadonlyNumberRegisterDefinition(
             elster_index=0x0001,
             factor=0.123,
             name="test-number-register",
@@ -57,7 +61,9 @@ async def test_mqtt_logger_publishes_autodiscovery(
                 payload=json.dumps(
                     {
                         "name": "test-device-id-test-number-register",
-                        "state_topic": "test/sensor/test-device-id-test-number-register/state",
+                        "state_topic": (
+                            "test/sensor/test-device-id-test-number-register/state"
+                        ),
                         "value_template": "{{ value_json.value }}",
                         "device": {
                             "identifiers": ["test-device-id"],
