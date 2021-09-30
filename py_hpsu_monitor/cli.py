@@ -1,8 +1,10 @@
 # pyright: reportUnknownMemberType=warning
 import asyncio
 from pathlib import Path
+import sys
 from typing import Optional
 
+from loguru import logger
 import typer
 
 from .commands.generate_can_message import generate_can_message_app
@@ -46,6 +48,12 @@ def run(
         if register_definition_file
         else load_default_register_definitions()
     ).register_definitions
+
+    logger.remove(0)
+    logger.add(
+        sink=sys.stderr,
+        filter=configuration.logger.levels,
+    )
 
     asyncio.run(
         run_monitor_canbus(

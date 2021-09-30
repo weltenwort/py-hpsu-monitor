@@ -2,41 +2,45 @@
 from typing import Any, Dict
 
 from ..elster_protocol.register_types import (
-    NumberRegisterDefinition,
+    NumberSensorRegisterDefinition,
     RegisterDefinition,
 )
 
 
 def get_device_class(register_definition: RegisterDefinition) -> Dict[str, Any]:
-    if (
-        isinstance(register_definition, NumberRegisterDefinition)
-        and register_definition.unit
-    ):
-        device_class = device_class_by_unit.get(register_definition.unit, None)
-        state_class = state_class_by_unit.get(register_definition.unit, None)
+    unit_of_measurement_attributes = (
+        {"unit_of_measurement": register_definition.unit}
+        if (isinstance(register_definition, NumberSensorRegisterDefinition))
+        else {}
+    )
+    device_class_attributes = (
+        {"device_class": device_class}
+        if (
+            isinstance(register_definition, NumberSensorRegisterDefinition)
+            and (
+                device_class := device_class_by_unit.get(register_definition.unit, None)
+            )
+        )
+        else {}
+    )
+    state_class_attributes = (
+        {"state_class": state_class}
+        if (
+            isinstance(register_definition, NumberSensorRegisterDefinition)
+            and (state_class := state_class_by_unit.get(register_definition.unit, None))
+        )
+        else {}
+    )
 
-        return {
-            "unit_of_measurement": register_definition.unit,
-            **(
-                {
-                    "device_class": device_class,
-                }
-                if device_class
-                else {}
-            ),
-            **(
-                {
-                    "state_class": state_class,
-                }
-                if state_class
-                else {}
-            ),
-        }
-
-    return {}
+    return {
+        **unit_of_measurement_attributes,
+        **device_class_attributes,
+        **state_class_attributes,
+    }
 
 
 device_class_by_unit = {
+    None: None,
     "°C": "temperature",
     "W": "power",
     "kW": "power",
@@ -46,6 +50,7 @@ device_class_by_unit = {
 }
 
 state_class_by_unit = {
+    None: None,
     "°C": "measurement",
     "W": "measurement",
     "kW": "measurement",

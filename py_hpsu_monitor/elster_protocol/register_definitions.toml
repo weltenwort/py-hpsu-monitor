@@ -1,15 +1,23 @@
 [[register_definitions]]
   elster_index = 0x0002
   factor = 0.1
-  kind = "number"
+  kind = "number-sensor"
   name = "temp-vorlauf-soll"
+  owner_id = 0x180
+  unit = "°C"
+
+[[register_definitions]]
+  elster_index = 0x0003
+  factor = 0.1
+  kind = "number-sensor"
+  name = "temp-dhw-soll"
   owner_id = 0x180
   unit = "°C"
 
 [[register_definitions]]
   elster_index = 0x000C
   factor = 0.1
-  kind = "number"
+  kind = "number-sensor"
   name = "temp-aussen"
   owner_id = 0x180
   unit = "°C"
@@ -17,7 +25,7 @@
 [[register_definitions]]
   elster_index = 0x000D
   factor = 0.1
-  kind = "number"
+  kind = "number-sensor"
   name = "temp-vorlauf-hz"
   owner_id = 0x180
   unit = "°C"
@@ -25,7 +33,7 @@
 [[register_definitions]]
   elster_index = 0x000E
   factor = 0.1
-  kind = "number"
+  kind = "number-sensor"
   name = "temp-speicher-ist-t-dhw"
   owner_id = 0x180
   unit = "°C"
@@ -33,14 +41,14 @@
 [[register_definitions]]
   elster_index = 0x0016
   factor = 0.1
-  kind = "number"
+  kind = "number-sensor"
   name = "temp-ruecklauf-ist"
   owner_id = 0x180
   unit = "°C"
 
 [[register_definitions]]
   elster_index = 0x01DA
-  kind = "number"
+  kind = "number-sensor"
   name = "durchfluss-hz"
   owner_id = 0x180
   unit = "l/h"
@@ -48,98 +56,98 @@
 [[register_definitions]]
   elster_index = 0x01D6
   factor = 0.1
-  kind = "number"
+  kind = "number-sensor"
   name = "temp-vorlauf-ist-t-hs"
   owner_id = 0x180
   unit = "°C"
 
 [[register_definitions]]
   elster_index = 0x069B
-  kind = "number"
+  kind = "number-sensor"
   name = "position-mischer-dhw"
   owner_id = 0x180
   unit = "%"
 
 [[register_definitions]]
   elster_index = 0x06A4
-  kind = "number"
+  kind = "number-sensor"
   name = "laufzeit-umwaelzpumpe"
   owner_id = 0x180
   unit = "h"
 
 [[register_definitions]]
   elster_index = 0x06A5
-  kind = "number"
+  kind = "number-sensor"
   name = "laufzeit-verdichter"
   owner_id = 0x180
   unit = "h"
 
 [[register_definitions]]
   elster_index = 0x06A6
-  kind = "number"
+  kind = "number-sensor"
   name = "energie-aufnahme-wp-kuehlen"
   owner_id = 0x180
   unit = "kWh"
 
 [[register_definitions]]
   elster_index = 0x06A7
-  kind = "number"
+  kind = "number-sensor"
   name = "energie-aufnahme-wp-heizen"
   owner_id = 0x180
   unit = "kWh"
 
 [[register_definitions]]
   elster_index = 0x091C
-  kind = "number"
+  kind = "number-sensor"
   name = "energie-aufnahme-ehs-ww"
   owner_id = 0x180
   unit = "kWh"
 
 [[register_definitions]]
   elster_index = 0x0920
-  kind = "number"
+  kind = "number-sensor"
   name = "energie-aufnahme-ehs-hz"
   owner_id = 0x180
   unit = "kWh"
 
 [[register_definitions]]
   elster_index = 0x092c
-  kind = "number"
+  kind = "number-sensor"
   name = "energie-ertrag-ww"
   owner_id = 0x180
   unit = "kWh"
 
 [[register_definitions]]
   elster_index = 0x0930
-  kind = "number"
+  kind = "number-sensor"
   name = "energie-ertrag-hz"
   owner_id = 0x180
   unit = "kWh"
 
 [[register_definitions]]
   elster_index = 0x001C
-  kind = "number"
+  kind = "number-sensor"
   name = "wasserdruck"
   owner_id = 0x180
   unit = "mbar"
 
 [[register_definitions]]
   elster_index = 0xC0F7
-  kind = "number"
+  kind = "number-sensor"
   name = "staerke-umwaelzpumpe"
   owner_id = 0x180
   unit = "%"
 
 [[register_definitions]]
   elster_index = 0xC0F9
-  kind = "number"
+  kind = "number-sensor"
   name = "leistung-ehs"
   owner_id = 0x180
   unit = "W"
 
 [[register_definitions]]
   elster_index = 0xC0FB
-  kind = "number"
+  kind = "number-sensor"
   name = "position-mischer-b1"
   owner_id = 0x180
   unit = "%"
@@ -147,7 +155,7 @@
 [[register_definitions]]
   elster_index = 0xC0FC
   factor = 0.1
-  kind = "number"
+  kind = "number-sensor"
   name = "temp-vorlauf-waermetauscher-ist-tv2"
   owner_id = 0x180
   unit = "°C"
@@ -155,7 +163,7 @@
 [[register_definitions]]
   elster_index = 0xC102
   factor = 0.1
-  kind = "number"
+  kind = "number-sensor"
   name = "temp-vorlauf-ehs-ist-tvbh2"
   owner_id = 0x180
   unit = "°C"
@@ -163,7 +171,49 @@
 [[register_definitions]]
   elster_index = 0xC103
   factor = 0.1
-  kind = "number"
+  kind = "number-sensor"
   name = "temp-kaeltemittel"
   owner_id = 0x180
   unit = "°C"
+
+[[register_definitions]]
+  elster_index = 0x0013
+  factor = 0.1
+  kind = "number-setting"
+  name = "temp-dhw-soll-1"
+  owner_id = 0x180
+
+[[register_definitions]]
+  elster_index = 0x0A06
+  factor = 0.1
+  kind = "number-setting"
+  name = "temp-dhw-soll-2"
+  owner_id = 0x180
+
+[[register_definitions]]
+  elster_index = 0x013E
+  factor = 0.1
+  kind = "number-setting"
+  name = "temp-dhw-soll-3"
+  owner_id = 0x180
+
+[[register_definitions]]
+  elster_index = 0x0691
+  factor = 0.1
+  kind = "number-setting"
+  name = "temp-dhw-hysteresis"
+  owner_id = 0x180
+
+[[register_definitions]]
+  elster_index = 0x0692
+  factor = 1
+  kind = "number-setting"
+  name = "timer-backup-heater"
+  owner_id = 0x180
+
+[[register_definitions]]
+  elster_index = 0x0180
+  factor = 1
+  kind = "number-setting"
+  name = "timer-dhw-ladezeit"
+  owner_id = 0x180

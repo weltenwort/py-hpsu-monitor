@@ -7,7 +7,7 @@ import pytest
 
 from ...config import MqttBrokerConfig, MqttConfig, MqttDeviceConfig
 from ...elster_protocol.register_types import (
-    ReadonlyNumberRegisterDefinition,
+    NumberSensorRegisterDefinition,
     RegisterDefinition,
 )
 from ...utils.publish_subscribe_topic import PublishSubscribeTopic
@@ -38,7 +38,7 @@ async def test_mqtt_logger_publishes_autodiscovery(
         ),
     )
     register_definitions: list[RegisterDefinition] = [
-        ReadonlyNumberRegisterDefinition(
+        NumberSensorRegisterDefinition(
             elster_index=0x0001,
             factor=0.123,
             name="test-number-register",

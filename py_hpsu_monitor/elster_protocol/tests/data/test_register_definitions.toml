@@ -1,22 +1,21 @@
 [[register_definitions]]
   elster_index = 0x0001
   factor = 0.123
-  kind = "number"
+  kind = "number-sensor"
   name = "test-number-register"
   owner_id = 0x180
   unit = "test-unit"
 
 [[register_definitions]]
   elster_index = 0x0002
-  kind = "number"
+  kind = "number-sensor"
   name = "test-number-register-without-factor"
   owner_id = 0x180
   unit = "test-unit"
 
 [[register_definitions]]
   elster_index = 0x0003
-  kind = "number"
+  kind = "number-setting"
   name = "test-writable-number-register"
   owner_id = 0x180
   unit = "test-unit"
-  is_writable = true

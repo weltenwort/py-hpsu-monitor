@@ -13,6 +13,7 @@ def test_load_default_configuration_from_text():
     assert configuration.can_bus.default_register_configuration.polling_interval == 60
     assert configuration.can_bus.register_configuration == []
     assert configuration.mqtt.broker.hostname == "localhost"
+    assert configuration.logger.levels == {"": "WARNING"}
 
 
 def test_load_configuration_from_text():

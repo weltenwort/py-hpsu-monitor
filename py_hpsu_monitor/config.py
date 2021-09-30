@@ -1,8 +1,8 @@
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel
-import tomlkit
+from tomlkit.api import parse
 
 
 def load_default_configuration():
@@ -17,7 +17,7 @@ def load_configuration_from_file_path(config_file_path: Path):
 
 
 def load_configuration_from_text(config_file_text: str) -> "PyHpsuMonitorConfig":
-    return PyHpsuMonitorConfig.parse_obj(dict(tomlkit.parse(config_file_text)))
+    return PyHpsuMonitorConfig.parse_obj(dict(parse(config_file_text)))
 
 
 class DefaultRegisterConfiguration(BaseModel):
@@ -60,15 +60,23 @@ class MqttConfig(BaseModel):
     enabled: bool = True
     configuration_topic_template: str = "homeassistant/{platform}/{object_id}/config"
     state_topic_template: str = "homeassistant/{platform}/{object_id}/state"
-    write_topic_template: str = "homeassistant/{platform}/{device_id}/write"
+    write_topic_template: str = "homeassistant/{platform}/{object_id}/set"
 
     broker: MqttBrokerConfig = MqttBrokerConfig()
     device: MqttDeviceConfig = MqttDeviceConfig()
 
 
+LoggerLevels = dict[Union[str, None], Union[str, int, bool]]
+
+
+class LoggerConfig(BaseModel):
+    levels: LoggerLevels = {"": "WARNING"}
+
+
 class PyHpsuMonitorConfig(BaseModel):
     can_bus: CanBusConfig = CanBusConfig()
     mqtt: MqttConfig = MqttConfig()
+    logger: LoggerConfig = LoggerConfig()
 
     class Config:
         allow_mutation = False

@@ -1,19 +1,17 @@
-from pydantic import BaseModel
-
 from ..config import MqttConfig
+from ..elster_protocol.register_types import WritableRegisterDefinition
+from .entity import get_entity_id
+from .platform import get_platform
 
 
-def get_write_topic(mqtt_config: MqttConfig):
+def get_overall_write_topic(mqtt_config: MqttConfig):
+    return mqtt_config.write_topic_template.format(object_id="+", platform="+")
+
+
+def get_write_topic(
+    mqtt_config: MqttConfig, register_definition: WritableRegisterDefinition
+):
     return mqtt_config.write_topic_template.format(
-        device_id=mqtt_config.device.id, platform="writable-sensor"
+        object_id=get_entity_id(mqtt_config, register_definition),
+        platform=get_platform(register_definition),
     )
-
-
-def parse_write_payload(payload: bytes):
-    return NumberMqttWriteMessagePayload.parse_raw(payload)
-
-
-class NumberMqttWriteMessagePayload(BaseModel):
-    kind: str = "number"
-    register_name: str
-    value: float
