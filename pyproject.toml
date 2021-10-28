@@ -20,7 +20,7 @@ pylint = "^2.10.2"
 black = "^21.7b0"
 pytest-watch = "^4.2.0"
 fabric = {version = "^2.6.0", optional = true}
-pytest-asyncio = "^0.15.1"
+pytest-asyncio = "^0.16.0"
 mock = "^4.0.3"
 
 [tool.poetry.extras]
