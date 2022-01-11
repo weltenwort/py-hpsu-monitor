@@ -22,7 +22,7 @@ wrapt = ">=1.11,<1.14"
 
 [[package]]
 name = "asyncio-mqtt"
-version = "0.11.0"
+version = "0.11.1"
 description = "Idomatic asyncio wrapper around paho-mqtt."
 category = "main"
 optional = false
@@ -596,7 +596,7 @@ deploy = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "ebdc96b3977fa262224aad63e76c8323f60ce3e98c283210f9cc35f3cd18f789"
+content-hash = "1975576e03d7d8a3231ce7719c0752738e0eb53a23d61712eaea2247bcf6274a"
 
 [metadata.files]
 aenum = [
@@ -609,8 +609,8 @@ astroid = [
     {file = "astroid-2.9.0.tar.gz", hash = "sha256:5939cf55de24b92bda00345d4d0659d01b3c7dafb5055165c330bc7c568ba273"},
 ]
 asyncio-mqtt = [
-    {file = "asyncio_mqtt-0.11.0-py3-none-any.whl", hash = "sha256:031213e8b2cef96732a6d5f3a43d1f3d7c23e99c4dc1a6d4349c985ac4d4eb95"},
-    {file = "asyncio_mqtt-0.11.0.tar.gz", hash = "sha256:b89a309f76cd03ea4b265a2b25c0a3a4c305a2c5fde20b7fdad2c08c892e5cb0"},
+    {file = "asyncio_mqtt-0.11.1-py3-none-any.whl", hash = "sha256:4d9cd8d94ae226b50cc3f143fe063af2ae48bd9b0f10d2fc8bb609e88d8a792f"},
+    {file = "asyncio_mqtt-0.11.1.tar.gz", hash = "sha256:6fc2ec01288a6ee0df88fa5a2f18439c4f8a7fe926339e4ecdf874e8da4ce45a"},
 ]
 atomicwrites = [
     {file = "atomicwrites-1.4.0-py2.py3-none-any.whl", hash = "sha256:6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e197"},
