@@ -1,0 +1,13 @@
+[Unit]
+Description=SocketCAN interface can0
+After=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/ip link set %i type can bitrate 20000
+ExecStart=/sbin/ip link set up %i
+ExecStop=/sbin/ip link set down %i
+
+[Install]
+WantedBy=multi-user.target
