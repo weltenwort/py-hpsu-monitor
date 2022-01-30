@@ -16,15 +16,15 @@ jobs:
         os: [ubuntu-20.04]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2.2.2
+      - uses: actions/checkout@v2.4.0
+      - uses: actions/setup-python@v2.3.1
         with:
           python-version: ${{ matrix.python_version }}
       - name: Setup poetry
         uses: Gr1N/setup-poetry@v7
         with:
           poetry-version: ${{ matrix.poetry_version }}
-      - uses: actions/cache@v2.1.6
+      - uses: actions/cache@v2.1.7
         with:
           path: ~/.cache/pypoetry/virtualenvs
           key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
