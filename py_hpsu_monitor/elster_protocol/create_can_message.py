@@ -6,11 +6,12 @@ import can
 from .elster_frame import (
     ElsterGenericFrame,
     ElsterReadRequestFrame,
+    ElsterWriteFrame,
 )
 
 
 def create_can_message(
-    frame: Union[ElsterReadRequestFrame, ElsterGenericFrame]
+    frame: Union[ElsterWriteFrame, ElsterReadRequestFrame, ElsterGenericFrame]
 ) -> can.Message:
     header = struct.pack(
         ">BBB",
@@ -21,6 +22,8 @@ def create_can_message(
 
     if isinstance(frame, ElsterReadRequestFrame):
         body = struct.pack(">H", frame.elster_index)
+    elif isinstance(frame, ElsterWriteFrame):
+        body = struct.pack(">Hh", frame.elster_index, frame.value)
     else:
         body = frame.payload
 

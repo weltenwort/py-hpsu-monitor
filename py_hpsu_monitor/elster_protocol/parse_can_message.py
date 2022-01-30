@@ -8,11 +8,13 @@ from .elster_frame import (
     ElsterReadRequestFrame,
     ElsterReadResponseFrame,
     ElsterFrameType,
+    ElsterWriteFrame,
 )
 
 
 def parse_can_message(message: can.Message) -> ElsterFrame:
-    sender = message.arbitration_id
+    sender: int = message.arbitration_id  # type: ignore
+    timestamp: float = message.timestamp  # type: ignore
     data = message.data
     receiver = (data[0] & 0xF0) * 8 + (data[1] & 0x0F)
     frame_type = data[0] & 0x0F
@@ -30,14 +32,22 @@ def parse_can_message(message: can.Message) -> ElsterFrame:
 
     if frame_type == ElsterFrameType.READ_REQUEST:
         return ElsterReadRequestFrame(
-            timestamp=message.timestamp,
+            timestamp=timestamp,
             sender=sender,
             receiver=receiver,
             elster_index=elster_index,
         )
     elif frame_type == ElsterFrameType.READ_RESPONSE:
         return ElsterReadResponseFrame(
-            timestamp=message.timestamp,
+            timestamp=timestamp,
+            sender=sender,
+            receiver=receiver,
+            elster_index=elster_index,
+            value=value,
+        )
+    elif frame_type == ElsterFrameType.WRITE:
+        return ElsterWriteFrame(
+            timestamp=timestamp,
             sender=sender,
             receiver=receiver,
             elster_index=elster_index,
@@ -45,7 +55,7 @@ def parse_can_message(message: can.Message) -> ElsterFrame:
         )
     else:
         return ElsterGenericFrame(
-            timestamp=message.timestamp,
+            timestamp=timestamp,
             sender=sender,
             receiver=receiver,
             frame_type=frame_type,

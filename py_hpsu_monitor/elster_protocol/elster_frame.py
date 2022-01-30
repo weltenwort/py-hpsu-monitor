@@ -6,6 +6,7 @@ from typing_extensions import Literal
 
 
 class ElsterFrameType(IntEnum):
+    WRITE = 0
     READ_REQUEST = 1
     READ_RESPONSE = 2
 
@@ -44,6 +45,24 @@ class ElsterGenericFrame(ElsterBaseFrame):
 
 
 @dataclass(frozen=True)
+class ElsterWriteFrame(ElsterBaseFrame):
+    elster_index: int
+    value: int
+    frame_type: Literal[ElsterFrameType.WRITE] = ElsterFrameType.WRITE
+
+    def __repr__(self):
+        return (
+            f"ElsterWriteFrame("
+            f"timestamp={datetime.utcfromtimestamp(self.timestamp)}, "
+            f"sender={self.sender:x}, "
+            f"receiver={self.receiver:x}, "
+            f"elster_index={self.elster_index:04x}, "
+            f"value={self.value:04x} ({self.value}), "
+            ")"
+        )
+
+
+@dataclass(frozen=True)
 class ElsterReadRequestFrame(ElsterBaseFrame):
     elster_index: int
     frame_type: Literal[ElsterFrameType.READ_REQUEST] = ElsterFrameType.READ_REQUEST
@@ -77,4 +96,9 @@ class ElsterReadResponseFrame(ElsterBaseFrame):
         )
 
 
-ElsterFrame = Union[ElsterReadRequestFrame, ElsterReadResponseFrame, ElsterGenericFrame]
+ElsterFrame = Union[
+    ElsterWriteFrame,
+    ElsterReadRequestFrame,
+    ElsterReadResponseFrame,
+    ElsterGenericFrame,
+]

@@ -13,6 +13,7 @@ def test_load_default_configuration_from_text():
     assert configuration.can_bus.default_register_configuration.polling_interval == 60
     assert configuration.can_bus.register_configuration == []
     assert configuration.mqtt.broker.hostname == "localhost"
+    assert configuration.logger.levels == {"": "WARNING"}
 
 
 def test_load_configuration_from_text():
@@ -34,7 +35,7 @@ def test_load_configuration_from_text():
     )
 
     assert configuration.can_bus.sender_id == 0x900
-    assert configuration.can_bus.default_register_configuration.polling_enabled == False
+    assert configuration.can_bus.default_register_configuration.polling_enabled is False
     assert configuration.can_bus.default_register_configuration.polling_interval == 90.0
     assert configuration.can_bus.register_configuration[0].elster_index == 0x000E
     assert configuration.can_bus.register_configuration[0].polling_interval == 30

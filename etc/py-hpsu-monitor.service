@@ -1,0 +1,23 @@
+[Unit]
+Description=HPSU Monitor
+Wants=network-online.target
+Wants=socketcan@can0.target
+After=network-online.target
+After=socketcan@can0.target
+StartLimitIntervalSec=30min
+StartLimitBurst=59
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=90
+ExecStartPre=/bin/rm -f %t/container-py-hpsu-monitor.pid %t/container-py-hpsu-monitor.ctr-id
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/container-py-hpsu-monitor.pid --cidfile %t/container-py-hpsu-monitor.ctr-id --cgroups=no-conmon -d --volume %h/py-hpsu-monitor-config.toml:/home/py-hpsu-monitor/config.toml:ro --network=host -i -t localhost/py-hpsu-monitor:latest run --config-file config.toml
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/container-py-hpsu-monitor.ctr-id -t 30
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/container-py-hpsu-monitor.ctr-id
+PIDFile=%t/container-py-hpsu-monitor.pid
+Type=forking
+
+[Install]
+WantedBy=multi-user.target default.target

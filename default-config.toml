@@ -1,7 +1,11 @@
+[logger.levels]
+"" = "WARNING"
+
 [mqtt]
 enabled = true
-configuration_topic_template = "homeassistant/sensor/{device_id}/config"
-state_topic_template = "homeassistant/sensor/{device_id}/state"
+configuration_topic_template = "homeassistant/{platform}/{object_id}/config"
+state_topic_template = "homeassistant/{platform}/{object_id}/state"
+write_topic_template = "homeassistant/{platform}/{object_id}/set"
 
 [mqtt.broker]
 hostname = "localhost"

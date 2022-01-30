@@ -1,0 +1,7 @@
+[flake8]
+exclude = .venv,.git,.tox,docs,venv,bin,deps,build
+doctests = True
+# To work with Black
+max-line-length = 88
+# E203: Whitespace before ':'
+extend-ignore = E203
