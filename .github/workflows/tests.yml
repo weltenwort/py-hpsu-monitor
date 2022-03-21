@@ -24,7 +24,7 @@ jobs:
         uses: Gr1N/setup-poetry@v7
         with:
           poetry-version: ${{ matrix.poetry_version }}
-      - uses: actions/cache@v2.1.7
+      - uses: actions/cache@v3
         with:
           path: ~/.cache/pypoetry/virtualenvs
           key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
