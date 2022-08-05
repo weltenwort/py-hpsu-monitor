@@ -1,4 +1,4 @@
-FROM python:3.10.5-alpine as base
+FROM python:3.10.6-alpine as base
 
 RUN adduser --disabled-password py-hpsu-monitor
 USER py-hpsu-monitor
