@@ -18,7 +18,7 @@ loguru = "^0.5.3"
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
 pylint = "^2.12.2"
-black = "^21.12b0"
+black = "^23.1a1"
 pytest-watch = "^4.2.0"
 fabric = {version = "^2.7.0", optional = true}
 pytest-asyncio = "^0.17.2"
