@@ -60,7 +60,7 @@ class NumberSensorRegisterDefinition(ReadableRegisterDefinition):
         return RegisterValue(
             register_type=self,
             timestamp=frame.timestamp,
-            value=frame.value * self.factor,
+            value=round(frame.value * self.factor, 1),
         )
 
 
